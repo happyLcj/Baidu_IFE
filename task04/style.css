@@ -1,0 +1,35 @@
+
+.content{
+  background-color: #ccc;
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -200px;
+}
+.content div{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px;
+  border-radius: 50px;
+  max-width: 900px;
+  max-height: auto;
+}
+.left-top{
+  position :relative;
+  right: 50px;
+  bottom: 50px;
+  border-color: transparent;
+  border-bottom-color: #fc0;
+  transform: rotate(-45deg);
+}
+.right-bottom{
+  position: relative;
+  left: 350px;
+  top: 50px;
+  border-color: transparent;
+  border-left-color: #fc0;
+  transform: rotate(45deg);
+}
