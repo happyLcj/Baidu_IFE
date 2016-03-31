@@ -23,11 +23,20 @@ function sortNum(a,b){
 (function (){
   var ui=document.getElementById("aqi-list");
   aqiData.sort(sortNum);
+  /*该方法虽然显示效果一样，但是<li>只是加在html后，并不会加载到<ul>里，不符合要求
   for(var i=0;i<aqiData.length;i++){
     if(aqiData[i][1]>=60)
       document.write("<li>第"+(i+1)+"名："+aqiData[i][0]+"&nbsp;&nbsp;"+aqiData[i][1]);
     else
       break;
+  }*/
+  //createElement实现
+  for(var i=0;i<aqiData.length;i++){
+    if(aqiData[i][1]>=60){
+      var li=document.createElement("li");
+      li.innerHTML="第"+(i+1)+"名："+aqiData[i][0]+"&nbsp;&nbsp;"+aqiData[i][1];
+      ui.appendChild(li);
+    }
   }
 })();
 </script>
