@@ -14,7 +14,7 @@ var aqiData = {};
  */
 function checkCity(city)     //检测城市名输入是否合法
 {
-  if(city.length==0||/[^\u4e00-\u9fa5a-zA-Z]/.test(city)){
+  if(city.length===0||/[^\u4e00-\u9fa5a-zA-Z]/.test(city)){
     alert("城市名输入不合法");
     return false;
   }
@@ -22,7 +22,7 @@ function checkCity(city)     //检测城市名输入是否合法
 }
 function checkAqi(aqi)    //检测空气质量输入是否合法
 {
-  if(aqi.length==0||/\D/.test(aqi)){
+  if(aqi.length===0||/\D/.test(aqi)){
     alert("空气质量输入不合法");
     return false;
   }
@@ -52,9 +52,9 @@ function renderAqiList() {
   //table.innerHTML = JSON.stringify(aqiData);
   for(var city in aqiData){
     var tr=document.createElement("tr");
-    tr.innerHTML="<td>"+city+"</td>"
-                +"<td>&nbsp;&nbsp;&nbsp;"+aqiData[city]+"</td>"
-                +"<td><button>删除</button></td>";
+    tr.innerHTML="<td>"+city+"</td>"+
+                "<td>&nbsp;&nbsp;&nbsp;"+aqiData[city]+"</td>"+
+                "<td><button>删除</button></td>";
     table.appendChild(tr);
   }
 }
