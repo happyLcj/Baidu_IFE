@@ -49,8 +49,10 @@ function rightOut()
 }
 function delDiv(event)
 {
-  var del=queue.removeChild(event.target);
-  alert(del.innerHTML);
+  if(event.target.parentNode==queue){  //确定是否点击到队列元素
+    var del=queue.removeChild(event.target);
+    alert(del.innerHTML);
+  }
 }
 function init()
 {
