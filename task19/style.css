@@ -1,0 +1,13 @@
+#queue{
+  position: relative;
+  height: 500px;
+}
+#queue div{
+  display: inline-block;
+  background-color: red;
+  vertical-align: bottom;
+  margin: 10px;
+  color: white;
+  text-align: center;
+  width: 30px;
+}
