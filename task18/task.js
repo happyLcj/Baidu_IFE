@@ -24,7 +24,7 @@ function rightIn()
   }
   var div=document.createElement("div");
   div.innerHTML=value;
-  queue.appendChild(div,queue.firstChild);
+  queue.appendChild(div);
   return true;
 }
 function leftOut()

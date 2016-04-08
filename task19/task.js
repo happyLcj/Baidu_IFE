@@ -1,15 +1,25 @@
 var data=[],render=[];
 var id,now=0;
 var queue=document.getElementById("queue");
-function leftIn()
-{
+function checkInput(){     //检测并获取输入的值
+  if(queue.childNodes.length==60){     //个数不能超过60
+    alert("数据个数已达60，不能再加入");
+    return -1;
+  }
   var input=document.getElementsByTagName("input")[0];
   var value=input.value;
   input.value="";
-  if(value===""||/\D/.test(value)){
-    alert("请输入数字");
-    return false;
+  if(value===""||!(/^1[0-9]$|^[2-9]\d$|^100$/.test(value))){ //判断输入是否为10-100
+    alert("请输入10-100的数");
+    return -1;
   }
+  return value;
+}
+function leftIn()
+{
+  var value=checkInput();
+  if(value==-1)   //输入不合法
+    return ;
   var div=document.createElement("div");
   div.innerHTML=value;
   div.style.height=value*4+"px";
@@ -18,13 +28,9 @@ function leftIn()
 }
 function rightIn()
 {
-  var input=document.getElementsByTagName("input")[0];
-  var value=input.value;
-  input.value="";
-  if(value===""||/\D/.test(value)){
-    alert("请输入数字");
-    return false;
-  }
+  var value=checkInput();
+  if(value==-1)   //输入不合法
+    return ;
   var div=document.createElement("div");
   div.innerHTML=value;
   div.style.height=value*4+"px";
@@ -61,6 +67,9 @@ function delDiv(event)
 function renderDiv(){
   if(now==render.length){
     clearTimeout(id);
+    var btn=document.getElementsByTagName("button");
+    for(var i=0;i<btn.length;i++)
+      btn[i].disabled=false;
     return ;
   }
   queue.innerHTML="";
@@ -115,6 +124,9 @@ function initData()
 }
 function sortHandle()
 {
+  var btn=document.getElementsByTagName("button");
+  for(var i=0;i<btn.length;i++)
+    btn[i].disabled=true;
   var start=queue.firstChild;
   if(start===null){
     alert("队列为空");
