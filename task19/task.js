@@ -1,5 +1,5 @@
 var data=[],render=[];
-var id,now=0;
+var id,now=0,isSort=false;
 var queue=document.getElementById("queue");
 function checkInput(){     //检测并获取输入的值
   if(queue.childNodes.length==60){     //个数不能超过60
@@ -15,11 +15,23 @@ function checkInput(){     //检测并获取输入的值
   }
   return value;
 }
+function checkSort()     //检测待更改的队列是否有序
+{
+  if(isSort==true){       //插入数据后，排好序的队列状态变为带排序(red)
+    var start=queue.firstChild;
+    while(start){
+      start.style.backgroundColor="red";
+      start=start.nextSibling;
+    }
+    isSort=false;
+  }
+}
 function leftIn()
 {
   var value=checkInput();
   if(value==-1)   //输入不合法
     return ;
+  checkSort();
   var div=document.createElement("div");
   div.innerHTML=value;
   div.style.height=value*4+"px";
@@ -31,6 +43,7 @@ function rightIn()
   var value=checkInput();
   if(value==-1)   //输入不合法
     return ;
+  checkSort();
   var div=document.createElement("div");
   div.innerHTML=value;
   div.style.height=value*4+"px";
@@ -68,6 +81,7 @@ function renderDiv(){
   if(now==render.length){
     clearTimeout(id);
     var btn=document.getElementsByTagName("button");
+    isSort=true;
     for(var i=0;i<btn.length;i++)
       btn[i].disabled=false;
     return ;
@@ -95,7 +109,7 @@ function sort()
     for(var j=i+1;j<data.length;j++){
       data[k].color="blue";
       data[j].color="blue";
-      render[num++]=JSON.stringify(data);
+      render[num++]=JSON.stringify(data); //将排序的过程变化状态存起来
       data[k].color="red";
       data[j].color="red";
       if(data[j].value<data[k].value)
@@ -135,7 +149,7 @@ function sortHandle()
   initData();
   sort();
   now=0;
-  id=setInterval(renderDiv,500);
+  id=setInterval(renderDiv,200);  //设置时间延迟，每200ms渲染一次排序过程
   return true;
 }
 function init()
@@ -149,6 +163,7 @@ function init()
   queue.addEventListener("click",delDiv,false);
   var sort=document.getElementById("sort");
   sort.onclick=sortHandle;
+  isSort=false;    //记录是否排完序
 }
 
 init();
